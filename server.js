@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcrypt-nodejs");
 const register = require("./controllers/register");
-const signin = require("./controllers/signin");
+const signIn = require("./controllers/signIn");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 const knex = require("knex");
@@ -13,19 +13,20 @@ app.use(express.json());
 app.use(cors());
 
 const db = knex({
-  client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    user: "postgres",
-    password: "1369",
-    database: "smartbrain",
-  },
+  client: 'pg',
+    connection: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
+    }
 });
 
 app.get("/", (req, res) => {
   res.send("success!!!");
 });
-app.post("/signin", signin.handleSignin(db, bcrypt));
+
+app.post("/signIn", signIn.handleSignIn(db, bcrypt));
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
@@ -39,6 +40,6 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("app is running on port", process.env.PORT);
+app.listen(process.env.API_PORT, () => {
+  console.log("app is running on port", process.env.API_PORT);
 });

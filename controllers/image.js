@@ -29,12 +29,14 @@ const handleApiCall = (req, res) => {
         );
         return;
       }
-      res.json(response.outputs[0].data.regions);
-      /*
+      res.json(response);
+      
+      let box = [];
       for (const c of response.outputs[0].data.regions) {
-        console.log(c.region_info.bounding_box);
+        box.push(c.region_info.bounding_box);
+        console.log(box);
       }
-      */
+      
     }
   );
 };
@@ -64,3 +66,20 @@ const handleImage = (req, res, db) => {
 };
 
 module.exports = { handleImage, handleApiCall };
+/*
+[{
+  "id":"1dbf4a18de36d5934cfe2bc9a73640d9",
+  "region_info":{
+    "bounding_box":{
+      "top_row":0.10530277341604233,
+      "left_col":0.3200133442878723,
+      "bottom_row":0.7280782461166382,
+      "right_col":0.6327363848686218},
+      "mask":null,
+      "polygon":null,
+      "point":null
+    },
+      "data":{
+        "concepts":[{
+          "id":"ai_8jtPl3Xj","name":"face","value":0.9996351003646851,"created_at":null,"language":"","app_id":"main","definition":"","vocab_id":"","visibility":null,"user_id":""}],"colors":[],"clusters":[],"embeddings":[],"regions":[],"frames":[],"tracks":[],"time_segments":[],"hits":[],"image":null,"video":null,"metadata":null,"geo":null,"text":null,"audio":null},"value":0.9996351003646851,"track_id":""}];
+          */
