@@ -1,17 +1,25 @@
+// Path: controllers\profile.js
 const handleProfileGet = (req, res, db) => {
   const { id } = req.params;
   db.select("*")
     .from("users")
-    .where({ id })
+    .where(
+      {
+        id: id,
+      },
+      [id]
+    )
     .then((user) => {
-      console.log(user);
       if (user.length) {
         res.json(user[0]);
       } else {
         res.status(400).json("Not found!");
       }
     })
+
     .catch((err) => res.status(400).json("error getting user"));
 };
 
-module.exports = {handleProfileGet};
+module.exports = {
+  handleProfileGet: handleProfileGet,
+};
