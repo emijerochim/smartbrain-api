@@ -1,12 +1,13 @@
 // Path: controllers\register.js
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const handleRegister = (req, res, db, bcrypt, secret) => {
   const { email, name, password } = req.body;
   if (!email || !name || !password) {
     return res.status(400).json("incorrect form submission");
   }
-  const hash = bcrypt.hashSync(password);
+  const hash = bcrypt.hashSync(password, 10);
   db.transaction((trx) => {
     trx
       .insert({
@@ -21,7 +22,7 @@ const handleRegister = (req, res, db, bcrypt, secret) => {
           .insert({
             email: loginEmail[0],
             name: name,
-            entries:0,
+            entries: 0,
             joined: new Date(),
           })
           .then((user) => {

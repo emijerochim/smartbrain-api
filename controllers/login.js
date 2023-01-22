@@ -1,11 +1,10 @@
 // Path: controllers\login.js
-const handleLogin = (req, res, db, bcrypt) => {
+const handleLogin = (req, res, db) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }
   db.select("email", "hash")
-
 
     .from("login")
     .where("email", "=", email)
