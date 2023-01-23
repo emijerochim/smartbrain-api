@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("./utils/verifyToken");
 const register = require("./controllers/register");
 const login = require("./controllers/login");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
+const cors = require("cors");
 const { Client } = require("pg");
 
 const db = new Client({
@@ -28,7 +28,13 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 
 app.get("/", verifyToken, (req, res) => {
   res.send("success!!!");
