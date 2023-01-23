@@ -2,51 +2,62 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("./utils/verifyToken");
 const register = require("./controllers/register");
 const login = require("./controllers/login");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
-const knex = require("knex");
+const { Client } = require("pg");
 
-const db = knex({
-  client: "pg",
-  connection: {
-    connectionString: process.env.DB_URL,
-    ssl: true,
-  },
+const db = new Client({
+  host: process.env.PGHOST,
+  database: process.env.PGNAME,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("Database connection error", err.stack);
+  } else {
+    console.log("Database connected ", process.env.PGHOST);
+  }
 });
 
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("it is working");
+app.get("/", verifyToken, (req, res) => {
+  res.send("success!!!");
 });
 
 app.post("/login", (req, res) => {
-  login.handleLogin(req, res, db);
+  login.handleLogin(req, res, db, process.env.JWT_KEY);
 });
 
 app.post("/register", (req, res) => {
-  register.handleRegister(req, res, db);
+  register.handleRegister(req, res, db, process.env.JWT_KEY);
 });
 
-app.get("/profile/:id", (req, res) => {
-  profile.handleProfileGet(req, res, db);
+app.get("/profile/:id", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : profile.handleProfileGet(req, res, db);
+  });
 });
 
-app.put("/image", (req, res) => {
-  image.handleImage(req, res, db);
+app.put("/image", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : image.handleImage(req, res, db);
+  });
 });
 
-app.post("/imageUrl", (req, res) => {
-  image.handleApiCall(req, res);
+app.post("/imageUrl", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : image.handleApiCall(req, res);
+  });
 });
 
 app.listen(process.env.PORT || 3000, () => {

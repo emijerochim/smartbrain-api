@@ -1,30 +1,29 @@
-// Path: controllers\login.js
-const handleLogin = (req, res, db) => {
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+const handleLogin = async (req, res, db, secret) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json("incorrect form submission");
+
+  const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+
+  if (!user.rows[0]) {
+    console.log("\nUser not found 🚫");
+    return res.status(404).json("User not found");
   }
-  db.select("email", "hash")
 
-    .from("login")
-    .where("email", "=", email)
-    .then((data) => {
-      const isValid = bcrypt.compareSync(password, data[0].hash);
-      if (isValid) {
-        return db
+  const isMatch = await bcrypt.compare(password, user.rows[0].password);
+  if (!isMatch) {
+    console.log("\nIncorrect password 🚫");
+    return res.status(401).json("Incorrect password");
+  }
 
-          .select("*")
-          .from("users")
-          .where("email", "=", email)
-          .then((user) => {
-            res.json(user[0]);
-          })
-          .catch((err) => res.status(400).json("unable to get user"));
-      } else {
-        res.status(400).json("wrong credentials");
-      }
-    })
-    .catch((err) => res.status(400).json("wrong credentials"));
+  const token = jwt.sign({ username: user.rows[0].username }, secret, {
+    expiresIn: 86400, // expires in 24 hours
+  });
+
+  res.status(200).json({ user: user.rows[0], token });
+
+  console.log("\nUser logged in ✅");
 };
 
 module.exports = {
