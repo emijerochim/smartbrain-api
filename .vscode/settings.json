@@ -1,5 +1,10 @@
 {
-    "cSpell.words": [
-        "clarifai"
-    ]
+  "cSpell.words": [
+    "clarifai",
+    "PGHOST",
+    "PGNAME",
+    "PGPASSWORD",
+    "PGPORT",
+    "PGUSER"
+  ]
 }

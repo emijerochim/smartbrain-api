@@ -28,16 +28,10 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-    optionSuccessStatus: 200,
-  })
-);
+app.use(cors());
 
 app.options("*", (req, res) => {
-  res.set("Access-Control-Allow-Headers", "*");
+  res.set("Access-Control-Allow-Headers", "Content-Type,Authorization");
   res.send();
 });
 
