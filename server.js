@@ -28,7 +28,11 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["smartbrain-production.up.railway.app"],
+  })
+);
 
 app.options("*", (req, res) => {
   res.set("Access-Control-Allow-Headers", "Content-Type,Authorization");
