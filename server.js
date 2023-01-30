@@ -35,7 +35,11 @@ app.use(
 );
 
 app.options("*", (req, res) => {
-  res.set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   res.send();
 });
 
