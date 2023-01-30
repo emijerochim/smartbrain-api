@@ -30,18 +30,12 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://smartbrain-production.up.railway.app"],
+    origin: ["http://www.smartbrain-production.up.railway.app"],
   })
 );
 
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.send();
-});
+//OPTIONS method that returns the required CORS headers.
+app.options("*", cors());
 
 app.get("/", verifyToken, (req, res) => {
   res.send("success!!!");
