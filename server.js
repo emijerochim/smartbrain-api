@@ -1,4 +1,6 @@
-require("dotenv").config();
+import * as dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("./utils/verifyToken");
@@ -28,7 +30,12 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  })
+);
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
