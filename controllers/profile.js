@@ -1,4 +1,3 @@
-// Path: controllers\profile.js
 const handleProfileGet = (req, res, db) => {
   const { id } = req.params;
   db.select("*")

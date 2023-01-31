@@ -1,4 +1,3 @@
-// Path: controllers\image.js
 import * as dotenv from "dotenv";
 dotenv.config();
 import Clarifai from "clarifai";
