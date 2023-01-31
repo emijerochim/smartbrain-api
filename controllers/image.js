@@ -1,4 +1,5 @@
 // Path: controllers\image.js
+require("dotenv").config();
 const Clarifai = require("clarifai");
 
 const app = new Clarifai.App({
@@ -8,20 +9,22 @@ const app = new Clarifai.App({
 const handleImage = (req, res, db) => {
   const { id } = req.body;
   db("users")
-  .where("id", "=", id)
-  .increment("entries", 1)
-  .returning("entries")
-  .then((entries) => {
-  db("users").count("id as count").then((data)=>{
-  if(entries[0] > 5000/data[0].count){
-  res.status(400).json("Maximum entry limit reached")
-  } else {
-  res.json(entries[0])
-  }
-  })
-  })
-  .catch((err) => res.status(400).json("unable to get entries"));
-  };
+    .where("id", "=", id)
+    .increment("entries", 1)
+    .returning("entries")
+    .then((entries) => {
+      db("users")
+        .count("id as count")
+        .then((data) => {
+          if (entries[0] > 5000 / data[0].count) {
+            res.status(400).json("Maximum entry limit reached");
+          } else {
+            res.json(entries[0]);
+          }
+        });
+    })
+    .catch((err) => res.status(400).json("unable to get entries"));
+};
 
 const handleApiCall = (req, res) => {
   app.models
@@ -43,7 +46,7 @@ const calculateFaceLocation = (data) => {
     rightCol: width - clarifaiFace.right_col * width,
     bottomRow: height - clarifaiFace.bottom_row * height,
   };
-}
+};
 
 module.exports = {
   handleImage,
