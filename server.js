@@ -30,12 +30,18 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://www.smartbrain-production.up.railway.app"],
+    origin: "https://smartbrain-production.up.railway.app",
   })
 );
 
-//OPTIONS method that returns the required CORS headers.
-app.options("*", cors());
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.send();
+});
 
 app.get("/", verifyToken, (req, res) => {
   res.send("success!!!");
@@ -67,6 +73,8 @@ app.post("/imageUrl", verifyToken, (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`app is running on port ${process.env.PORT}`);
 });
+
+//xd
