@@ -19,4 +19,4 @@ const isRegistrationValid = async (email, password) => {
   return isEmailValid && isPasswordValid;
 };
 
-module.exports = isRegistrationValid;
+export default isRegistrationValid;

@@ -1,15 +1,15 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-const express = require("express");
-const jwt = require("jsonwebtoken");
-const verifyToken = require("./utils/verifyToken");
-const register = require("./controllers/register");
-const login = require("./controllers/login");
-const profile = require("./controllers/profile");
-const image = require("./controllers/image");
-const cors = require("cors");
-const { Client } = require("pg");
+import jwt from "jsonwebtoken";
+import verifyToken from "./utils/verifyToken.js";
+import register from "./controllers/register.js";
+import login from "./controllers/login.js";
+import profile from "./controllers/profile.js";
+import image from "./controllers/image.js";
+import cors from "cors";
+import pkg from "pg";
+const { Client } = pkg;
 
 const db = new Client({
   host: process.env.PGHOST,

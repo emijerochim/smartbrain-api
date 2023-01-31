@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const handleLogin = async (req, res, db, secret) => {
   const { email, password } = req.body;
@@ -26,6 +26,6 @@ const handleLogin = async (req, res, db, secret) => {
   console.log("\nUser logged in ✅");
 };
 
-module.exports = {
+export default {
   handleLogin: handleLogin,
 };

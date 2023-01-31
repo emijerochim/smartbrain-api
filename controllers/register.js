@@ -1,7 +1,6 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const isRegistrationValid = require("../utils/isRegistrationValid");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import isRegistrationValid from "../utils/isRegistrationValid.js";
 
 const handleRegister = async (req, res, db, secret) => {
   const { username, email, password } = req.body;
@@ -28,6 +27,6 @@ const handleRegister = async (req, res, db, secret) => {
   console.log("\nUser added ✅");
 };
 
-module.exports = {
+export default {
   handleRegister: handleRegister,
 };

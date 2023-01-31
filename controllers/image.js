@@ -1,9 +1,10 @@
 // Path: controllers\image.js
-require("dotenv").config();
-const Clarifai = require("clarifai");
+import * as dotenv from "dotenv";
+dotenv.config();
+import Clarifai from "clarifai";
 
 const app = new Clarifai.App({
-  apiKey: "3fb6bc846fe942b19e9d49722d6c840c",
+  apiKey: process.env.API_KEY,
 });
 
 const handleImage = (req, res, db) => {
@@ -48,7 +49,7 @@ const calculateFaceLocation = (data) => {
   };
 };
 
-module.exports = {
+export default {
   handleImage,
   calculateFaceLocation,
   handleApiCall,
