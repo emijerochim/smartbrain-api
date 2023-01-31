@@ -3,7 +3,7 @@ require("dotenv").config();
 const Clarifai = require("clarifai");
 
 const app = new Clarifai.App({
-  apiKey: process.env.API_KEY,
+  apiKey: "3fb6bc846fe942b19e9d49722d6c840c",
 });
 
 const handleImage = (req, res, db) => {
