@@ -8,7 +8,7 @@ import pkg from "pg";
 const { Client } = pkg;
 
 import image from "./controllers/image.js";
-import handleLogin from "./controllers/login.js";
+import login from "./controllers/login.js";
 import register from "./controllers/register.js";
 
 const db = new Client({
