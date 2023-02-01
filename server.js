@@ -30,7 +30,16 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://smartbrain-production.up.railway.app",
+      "http://smartbrain-production.up.railway.app",
+      "http://localhost:3000",
+      "http://localhost:3001",
+    ],
+  })
+);
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
