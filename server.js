@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import verifyToken from "./utils/verifyToken.js";
 import register from "./controllers/register.js";
 import login from "./controllers/login.js";
-import profile from "./controllers/profile.js";
 import image from "./controllers/image.js";
 import cors from "cors";
 import pkg from "pg";
@@ -53,21 +52,9 @@ app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, process.env.JWT_KEY);
 });
 
-app.get("/profile/:id", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : profile.handleProfileGet(req, res, db);
-  });
-});
-
 app.put("/image", verifyToken, (req, res) => {
   jwt.verify(req.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : image.handleImage(req, res, db);
-  });
-});
-
-app.post("/imageUrl", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : image.handleApiCall(req, res);
+    err ? res.sendStatus(403) : image.handleApiCall(req, res, db);
   });
 });
 
