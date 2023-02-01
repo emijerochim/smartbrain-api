@@ -3,12 +3,13 @@ dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
 import verifyToken from "./utils/verifyToken.js";
-import register from "./controllers/register.js";
-import login from "./controllers/login.js";
-import image from "./controllers/image.js";
 import cors from "cors";
 import pkg from "pg";
 const { Client } = pkg;
+
+import image from "./controllers/image.js";
+import handleLogin from "./controllers/login.js";
+import register from "./controllers/register.js";
 
 const db = new Client({
   host: process.env.PGHOST,
@@ -45,11 +46,11 @@ app.get("/", verifyToken, (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  login.handleLogin(req, res, db, process.env.JWT_KEY);
+  login(req, res, db, process.env.JWT_KEY);
 });
 
 app.post("/register", (req, res) => {
-  register.handleRegister(req, res, db, process.env.JWT_KEY);
+  register(req, res, db, process.env.JWT_KEY);
 });
 
 app.put("/image", verifyToken, (req, res) => {

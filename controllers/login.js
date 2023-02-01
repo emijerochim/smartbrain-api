@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const handleLogin = async (req, res, db, secret) => {
+const login = async (req, res, db, secret) => {
   //check if the token is valid, if it is, return the user and the token
   const { token } = req.body;
   if (token) {
@@ -19,9 +19,10 @@ const handleLogin = async (req, res, db, secret) => {
   //if it isn't, continue with the login process
   const { email, password } = req.body;
 
-  const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+  const user = await db.query("SELECT * FROM users WHERE email = $1", [email])
+    .rows[0];
 
-  if (!user.rows[0]) {
+  if (!user) {
     console.log("\nUser not found 🚫");
     return res.status(404).json("User not found");
   }
@@ -41,4 +42,4 @@ const handleLogin = async (req, res, db, secret) => {
   console.log("\nUser logged in ✅");
 };
 
-export default handleLogin;
+export default login;
