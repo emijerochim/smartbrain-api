@@ -21,9 +21,9 @@ const db = new Client({
 
 db.connect((err) => {
   if (err) {
-    console.error("Database connection error", err.stack);
+    console.error("🔴 Database connection error\n", err.stack);
   } else {
-    console.log("Database connected ", process.env.PGHOST);
+    console.log("📁 Database connected \n", process.env.PGHOST);
   }
 });
 
@@ -69,5 +69,5 @@ app.put("/image", verifyToken, (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`💚 app is running on \n🔌 port ${process.env.PORT}\n`);
+  console.log(`\n💚 APp is running on \n🔌 PORT ${process.env.PORT}\n`);
 });

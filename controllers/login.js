@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const login = async (req, res, db, secret) => {
+  console.log(req.body);
+
   //check if the token is valid, if it is, return the user and the token
   const { token } = req.body;
   if (token) {
