@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 const login = async (req, res, db, secret) => {
   //check if the token is valid, if it is, return the user and the token
-  const { token } = req.body;
+  let { token } = req.body;
   if (token) {
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
