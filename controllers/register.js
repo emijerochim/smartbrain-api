@@ -15,10 +15,11 @@ const register = async (req, res, db, secret) => {
 
   const hash = bcrypt.hashSync(password, 10);
 
-  const user = await db.query(
-    "INSERT INTO users (email, password, username, id) VALUES($1, $2, $3, $4) RETURNING *",
-    [email, hash, username, id]
-  ).rows[0];
+  const users = await db.query(
+    "INSERT INTO users (id, email, password, username) VALUES($1, $2, $3, $4) RETURNING *",
+    [id, email, hash, username]
+  );
+  const user = users.rows[0];
 
   const token = jwt.sign({ id: user.id }, secret, {
     expiresIn: 86400, // expires in 24 hours
