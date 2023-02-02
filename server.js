@@ -33,8 +33,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://smartbrain-production.up.railway.app",
       "http://smartbrain-production.up.railway.app",
+      "https://smartbrain-production.up.railway.app",
       "http://localhost:3000",
       "http://localhost:3001",
     ],
@@ -69,5 +69,5 @@ app.put("/image", verifyToken, (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`app is running on port ${process.env.PORT}`);
+  console.log(`💚 app is running on \n🔌 port ${process.env.PORT}\n`);
 });
