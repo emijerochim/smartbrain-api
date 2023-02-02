@@ -87,5 +87,5 @@ app.put("/image", verifyToken, (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`\n💚 app is running on \n🔌 PORT ${process.env.PORT}\n`);
+  console.log(`\n💚 app is running on \n🔌 port ${process.env.PORT}\n`);
 });
