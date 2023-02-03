@@ -15,6 +15,7 @@ const validatePassword = (password) => {
 const isRegistrationValid = async (email, password) => {
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
+  console.log("email: ", isEmailValid, "password: ", isPasswordValid);
 
   return isEmailValid && isPasswordValid;
 };
