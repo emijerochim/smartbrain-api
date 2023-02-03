@@ -1,4 +1,4 @@
-const validateEmail = (email) => {
+const validateEmail = async (email) => {
   return String(email)
     .toLowerCase()
     .match(
@@ -6,15 +6,15 @@ const validateEmail = (email) => {
     );
 };
 
-const validatePassword = (password) => {
+const validatePassword = async (password) => {
   return String(password)
     .toLowerCase()
     .match(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/);
 };
 
 const isRegistrationValid = async (email, password) => {
-  const isEmailValid = validateEmail(email);
-  const isPasswordValid = validatePassword(password);
+  const isEmailValid = await validateEmail(email);
+  const isPasswordValid = await validatePassword(password);
   console.log("email: ", isEmailValid, "password: ", isPasswordValid);
 
   return isEmailValid && isPasswordValid;
