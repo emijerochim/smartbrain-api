@@ -6,7 +6,7 @@ import isRegistrationValid from "../utils/isRegistrationValid.js";
 const register = async (req, res, db, secret) => {
   const { username, email, password } = req.body;
   const id = uuidv4();
-  console.log("💙 email: ", email, "password: ", password);
+  console.log("💙 email: ", email, "password: ", password, "secret: ", secret);
 
   const isValid = await isRegistrationValid(email, password);
   if (!isValid) {
