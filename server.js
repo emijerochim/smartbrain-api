@@ -75,7 +75,7 @@ app.post("/register", (req, res) => {
   register(req, res, db, process.env.JWT_KEY);
 });
 
-app.put("/image", verifyToken, (req, res) => {
+app.post("/image", verifyToken, (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
