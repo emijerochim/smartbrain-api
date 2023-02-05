@@ -57,6 +57,12 @@ app.get("/", verifyToken, (req, res) => {
   res.send("success!!!");
 });
 
+app.post("/verify-token", (req, res) => {
+  jwt.verify(req.body.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : res.json(authData);
+  });
+});
+
 app.post("/login", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -82,7 +88,7 @@ app.post("/image", verifyToken, (req, res) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   jwt.verify(req.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : image.handleApiCall(req, res, db);
+    err ? res.sendStatus(403) : res.json(image.handleApiCall(req, res, db));
   });
 });
 
