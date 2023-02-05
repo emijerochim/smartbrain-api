@@ -6,7 +6,7 @@ const app = new Clarifai.App({
   apiKey: process.env.API_KEY,
 });
 
-const handleApiCall = (req, res) => {
+const box = (req, res) => {
   console.log(req.body.input);
 
   app.models
@@ -18,4 +18,4 @@ const handleApiCall = (req, res) => {
     });
 };
 
-export default handleApiCall;
+export default box;

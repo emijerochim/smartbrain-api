@@ -2,15 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
-import verifyToken from "./verifyToken.js";
 import cors from "cors";
 import pkg from "pg";
-const { Client } = pkg;
-
-import image from "./controllers/image.js";
+import verifyToken from "./verifyToken.js";
 import login from "./controllers/login.js";
 import register from "./controllers/register.js";
+import box from "./controllers/box.js";
 
+const { Client } = pkg;
 const db = new Client({
   host: process.env.PGHOST,
   database: process.env.PGNAME,
@@ -82,13 +81,8 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/image", verifyToken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   jwt.verify(req.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : res.json(image.handleApiCall(req, res, db));
+    err ? res.sendStatus(403) : res.json(box(req, res, db));
   });
 });
 
