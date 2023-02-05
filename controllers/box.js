@@ -7,6 +7,8 @@ const app = new Clarifai.App({
 });
 
 const box = (req, res) => {
+  console.log("REQ BODY 😀" + req.body);
+
   app.models
     .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
     .then((data) => {
