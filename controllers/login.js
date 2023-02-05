@@ -2,21 +2,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const login = async (req, res, db, secret) => {
-  //check if the token is valid, if it is, return the user and the token
-  let { token } = req.body;
-  if (token) {
-    jwt.verify(token, secret, (err, decoded) => {
-      if (err) {
-        console.log("\nToken is invalid 🚫");
-        return res.status(401).json("Token is invalid");
-      } else {
-        console.log("\nToken is valid ✅");
-        return res.status(200).json({ user: decoded, token: token });
-      }
-    });
-  }
-
-  //if it isn't, continue with the login process
   const { email, password } = req.body;
 
   const users = await db.query("SELECT * FROM users WHERE email = $1", [email]);
