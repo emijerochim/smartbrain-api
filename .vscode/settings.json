@@ -5,6 +5,7 @@
     "PGNAME",
     "PGPASSWORD",
     "PGPORT",
-    "PGUSER"
+    "PGUSER",
+    "uuidv"
   ]
 }

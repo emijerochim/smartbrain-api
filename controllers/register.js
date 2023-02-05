@@ -1,14 +1,20 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import isRegistrationValid from "../utils/isRegistrationValid.js";
 
 const register = async (req, res, db, secret) => {
   const { username, email, password } = req.body;
   const id = uuidv4();
 
-  const isValid = await isRegistrationValid(email, password);
-  if (!isValid) {
+  const isRegistrationValid = async (email, password) => {
+    const emailRegex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    return emailRegex.test(email) && passwordRegex.test(password);
+  };
+
+  if (!(await isRegistrationValid(email, password))) {
     console.log("\nUser not added 🚫");
     return res.status(400).json("Registration request is invalid");
   } else {

@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
-import verifyToken from "./utils/verifyToken.js";
+import verifyToken from "./verifyToken.js";
 import cors from "cors";
 import pkg from "pg";
 const { Client } = pkg;
