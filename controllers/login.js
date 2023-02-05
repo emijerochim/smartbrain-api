@@ -18,11 +18,12 @@ const login = async (req, res, db, secret) => {
     return res.status(401).json("Incorrect password");
   }
 
-  token = jwt.sign({ username: user.username }, secret, {
-    expiresIn: 86400, // expires in 24 hours
+  jwt.sign({ user }, "secretKey", { expiresIn: "7d" }, (err, token) => {
+    res.status(200).json({
+      token,
+      user,
+    });
   });
-
-  res.status(200).json({ user: user, token: token });
 
   console.log("\nUser logged in ✅");
 };
