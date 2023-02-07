@@ -7,20 +7,37 @@ const app = new Clarifai.App({
 });
 
 const box = (req, res) => {
-  app.models
-    .predict(
-      {
-        id: "face-detection",
-        name: "face-detection",
-        version: "6dc7e46bc9124c5c8824be4822abe105",
-        type: "visual-detector",
-      },
-      req.body.input
-    )
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => res.status(400).json("unable to work with API"));
+  if (req.body.input) {
+    app.models
+      .predict(
+        {
+          id: "face-detection",
+          name: "face-detection",
+          version: "6dc7e46bc9124c5c8824be4822abe105",
+          type: "visual-detector",
+        },
+        req.body.input
+      )
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => res.status(400).json("unable to work with API"));
+  } else if (req.body.inputs[0].data.image) {
+    app.models
+      .predict(
+        {
+          id: "face-detection",
+          name: "face-detection",
+          version: "6dc7e46bc9124c5c8824be4822abe105",
+          type: "visual-detector",
+        },
+        req.body.inputs[0].data.image.url
+      )
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => res.status(400).json("unable to work with API"));
+  }
 };
 
 export default box;
