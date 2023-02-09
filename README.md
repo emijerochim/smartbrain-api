@@ -9,8 +9,9 @@ The API is designed to handle user registration and login through JWT, and calcu
 ### 📱 Frontend
 * HTML5, CSS3, Sass, React.js
 
-### 🖥️ Backend
-* Node.js, Express, JWT Authentication, pg
+### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
+* Node.js, Express, JWT Authentication, pg 
+
 
 ### 💾 Database
 * PostgreSQL
