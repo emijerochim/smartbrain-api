@@ -81,6 +81,10 @@ The web server should start running and log the message
 ```💚 app is running on 🔌 port ${process.env.PORT}```
 
 
+## Contact
+* 💼  You can see my portfolio at <a href="https://emijerochim.com/">emijerochim.com</a>
+* ✉️  Mail me at <a href="mailto:dev@emijerochim.com/">dev@emijerochim.com</a></p>
+
 ________________
 
 ### Frontend code:
@@ -90,8 +94,4 @@ ________________
 * [github.com/emijerochim/smartbrain-api](http://github.com/emijerochim/smartbrain-api)
 
 ### [🧠 Try the demo](http://smartbrain-production.up.railway.app)
-
-## Contact
-* 💼  You can see my portfolio at <a href="https://emijerochim.com/">emijerochim.com</a>
-* ✉️  Mail me at <a href="mailto:dev@emijerochim.com/">dev@emijerochim.com</a></p>
 
