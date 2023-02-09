@@ -6,7 +6,7 @@ The API is designed to handle user registration and login through JWT, and calcu
 
 ## Stack
 
-### 📱 Frontend
+### 📱 [Frontend](http://github.com/emijerochim/smartbrain)
 * HTML5, CSS3, Sass, React.js
 
 ### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
