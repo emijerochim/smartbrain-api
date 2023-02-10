@@ -1,11 +1,11 @@
-## smartbrain-api 🧠
+## 🧠 smartbrain-api 
 
 This is a backend API built using Node.js, Express, and PostgreSQL that provides a RESTful API for a Face Detection application.
  
 The server is designed to handle user registration and login through JWT and detect faces on a given image URL using data from the Clarifai API
 <br></br>
 
-## ▶️ Installation 
+## Installation ▶️ 
 
 1. Clone the repository
 ```git clone https://github.com/emijerochim/smartbrain-api.git```
@@ -21,7 +21,7 @@ The server is designed to handle user registration and login through JWT and det
 5. Run the code with `npm run dev` or `npm start`
 
 <br></br>
-## 🧰 Stack 
+## Stack 🧰
 
 ### 📱 [Frontend](http://github.com/emijerochim/smartbrain)
 * HTML5, CSS3, Sass, React.js
@@ -29,11 +29,11 @@ The server is designed to handle user registration and login through JWT and det
 ### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
 * Node.js, Express, JWT Authentication, pg 
 
-### 💾 Database
+### Database 💾
 * PostgreSQL
 
 <br></br>
-## 📚 Dependencies 
+## Dependencies 📚
 
 The following packages are required to run this code:
 
@@ -44,7 +44,7 @@ The following packages are required to run this code:
 - `pg` for interacting with a PostgreSQL database
 
 <br></br>
-## 🛠️ Endpoints 
+## Endpoints 🛠️
 
 The code creates an Express.js app and sets up the following routes:
 
@@ -57,7 +57,7 @@ The code creates an Express.js app and sets up the following routes:
 The code also connects to a PostgreSQL database using the `pg` package, and includes a `verifyToken` middleware function to handle protected routes.
 
 <br></br>
-## 🔐️ Environment Variables 
+## Environment Variables 🔐️
 
 The following environment variables are used in this code:
 
@@ -70,7 +70,7 @@ The following environment variables are used in this code:
 - `PORT` : the port number to run the web server on
 
 <br></br>
-## 🗃️ Logs 
+## Logs 🗃️
 
 The database should connect and log the message
 
@@ -85,12 +85,13 @@ The web server should start running and log the message
 ```💚 app is running on 🔌 port ${process.env.PORT}```
 
 <br></br>
-## 👋 Contact
+## Contact 👋
 
 *  You can see my portfolio at <a href="https://emijerochim.com/">emijerochim.com</a> 💼
 *  Mail me at <a href="mailto:dev@emijerochim.com/">dev@emijerochim.com</a> ✉️
 
 <br></br>
+______________________
 
 ### Frontend code:
 * [github.com/emijerochim/smartbrain](http://github.com/emijerochim/smartbrain)
