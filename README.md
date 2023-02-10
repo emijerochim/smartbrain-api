@@ -29,7 +29,7 @@ The server is designed to handle user registration and login through JWT and det
 ### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
 * Node.js, Express, JWT Authentication, pg 
 
-### Database 💾
+### 💾 Database 
 * PostgreSQL
 
 <br></br>
