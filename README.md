@@ -1,10 +1,10 @@
 ## 🧠 smartbrain-api 
 
-This is a backend API built using Node.js, Express, and PostgreSQL that provides a RESTful API for a Face Detection application.
- 
-The server is designed to handle user registration and login through JWT and detect faces on a given image URL using data from the Clarifai API
-<br></br>
+<div align="center">
+ <img src="https://github.com/emijerochim/smartbrain-api/blob/master/clarifai.jpg" width="800px">
+</div>
 
+<br></br>
 ## Installation ▶️ 
 
 1. Clone the repository
