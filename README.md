@@ -3,8 +3,23 @@
 This is a backend API built using Node.js, Express, and PostgreSQL that provides a RESTful API for a Face Detection application. 
 The API is designed to handle user registration and login through JWT, and calculate the face position on a given image using the Clarifai API
 
+## Installation ▶️
 
-## Stack
+1. Clone the repository
+```git clone https://github.com/emijerochim/smartbrain-api.git```
+
+2. Enter into the project folder
+```cd smartbrain-api```
+
+3. Install the required packages
+```npm update```
+
+4. Create a `.env` file in the project directory and set the environment variables
+
+5. Run the code with `npm run dev` or `npm start`
+
+
+## Stack 🧰
 
 ### 📱 [Frontend](http://github.com/emijerochim/smartbrain)
 * HTML5, CSS3, Sass, React.js
@@ -12,9 +27,9 @@ The API is designed to handle user registration and login through JWT, and calcu
 ### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
 * Node.js, Express, JWT Authentication, pg 
 
-
 ### 💾 Database
 * PostgreSQL
+
 
 ## Dependencies 📚
 
@@ -27,7 +42,7 @@ The following packages are required to run this code:
 - `pg` for interacting with a PostgreSQL database
 
 
-## Functionality 🛠️
+## Endpoints 🛠️
 
 The code creates an Express.js app and sets up the following routes:
 
@@ -44,25 +59,16 @@ The code also connects to a PostgreSQL database using the `pg` package, and incl
 
 The following environment variables are used in this code:
 
-- `PGHOST`: the hostname of the PostgreSQL database
-- `PGNAME`: the name of the PostgreSQL database
-- `PGUSER`: the username to connect to the PostgreSQL database
-- `PGPASSWORD`: the password to connect to the PostgreSQL database
-- `PGPORT`: the port to use when connecting to the PostgreSQL database
-- `JWT_KEY`: the secret key to sign JSON web tokens with
-- `PORT`: the port number to run the web server on
+- `PGHOST` : the hostname of the PostgreSQL database
+- `PGNAME` : the name of the PostgreSQL database
+- `PGUSER` : the username to connect to the PostgreSQL database
+- `PGPASSWORD` : the password to connect to the PostgreSQL database
+- `PGPORT` : the port to use when connecting to the PostgreSQL database
+- `JWT_KEY` : the secret key to sign JSON web tokens with
+- `PORT` : the port number to run the web server on
 
 
-## Running the Code ▶️
-
-1. Copy the code into a file named `index.js` in a new project directory.
-2. Run `npm init` to create a `package.json` file for the project.
-3. Install the required packages by running `npm install express dotenv jsonwebtoken cors pg`.
-4. Create a `.env` file in the project directory and set the environment variables.
-5. Run the code with `node index.js`.
-
-________________
-
+## Logs 🗃️
 
 The database should connect and log the message
 
@@ -72,9 +78,7 @@ If there's a connection error with the database
 
 ```🔴 Database connection error```
 
-
 Its usually caused by undefined enviromental variables, specially if it happened when moving from ```development``` to ```production```
-
 
 The web server should start running and log the message
 
@@ -82,6 +86,7 @@ The web server should start running and log the message
 
 
 ## Contact
+
 * 💼  You can see my portfolio at <a href="https://emijerochim.com/">emijerochim.com</a>
 * ✉️  Mail me at <a href="mailto:dev@emijerochim.com/">dev@emijerochim.com</a></p>
 
