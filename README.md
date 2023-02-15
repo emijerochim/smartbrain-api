@@ -72,15 +72,18 @@ The following environment variables are used in this code:
 <br></br>
 ## Logs 🗃️
 
-The database should connect and log the message
+
+The database connects successfully:
 
 ```📁 Database connected ${process.env.PGHOST}```
 
-If there's a connection error with the database 
+
+There's a connection error with the database:
 
 ```🔴 Database connection error```
 
-The web server should start running and log the message
+
+The web server started successfully:
 
 ```💚 app is running on 🔌 port ${process.env.PORT}```
 
