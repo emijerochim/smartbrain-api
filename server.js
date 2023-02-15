@@ -30,14 +30,7 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: [
-      "https://smartbrain-production.up.railway.app",
-      "http://localhost:3000",
-    ],
-  })
-);
+app.use(cors());
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -49,11 +42,6 @@ app.options("*", (req, res) => {
 });
 
 app.get("/", verifyToken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   res.send("success!!!");
 });
 
@@ -64,20 +52,10 @@ app.post("/verify-token", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   login(req, res, db, process.env.JWT_KEY);
 });
 
 app.post("/register", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   register(req, res, db, process.env.JWT_KEY);
 });
 
