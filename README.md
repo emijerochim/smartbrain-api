@@ -14,11 +14,11 @@
 ```cd smartbrain-api```
 
 3. Install the required packages
-```npm update```
+```npm install```
 
 4. Create a `.env` file in the project directory and set the environment variables
 
-5. Run the code with `npm run dev` or `npm start`
+5. Run the code with `npm start`
 
 <br></br>
 ## Stack 🧰
@@ -104,5 +104,5 @@ ______________________
 
 <br></br>
 
-### [🧠 Try the demo](http://smartbrain-production.up.railway.app)
+### [🧠 Try the demo](https://emijerochim.github.io/smartbrain)
 
