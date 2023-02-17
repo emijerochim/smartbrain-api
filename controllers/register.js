@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
-const register = async (req, res, db, secret) => {
+const register = async (req, res, db) => {
   const { username, email, password } = req.body;
   const id = uuidv4();
 
@@ -26,7 +26,7 @@ const register = async (req, res, db, secret) => {
     );
     const user = users.rows[0];
 
-    const token = jwt.sign({ id: user.id }, secret, {
+    const token = jwt.sign({ id: user.id }, "secretKey", {
       expiresIn: 86400, // expires in 24 hours
     });
 

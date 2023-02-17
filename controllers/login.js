@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const login = async (req, res, db, secret) => {
+const login = async (req, res, db) => {
   const { email, password } = req.body;
 
   const users = await db.query("SELECT * FROM users WHERE email = $1", [email]);
