@@ -32,6 +32,12 @@
 ### 💾 Database 
 * PostgreSQL
 
+### 📚 Libraries
+* Clarifai API
+
+### ☁️ Deploy
+* GitHub Pages
+
 <br></br>
 ## Dependencies 📚
 
