@@ -42,9 +42,10 @@ app.options("*", (req, res) => {
 });
 
 app.get("/", verifyToken, (req, res) => {
-  res.send("success!!!");
+  jwt.verify(req.body.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : res.json(authData);
+  });
 });
-
 app.post("/verify-token", (req, res) => {
   jwt.verify(req.body.token, "secretKey", (err, authData) => {
     err ? res.sendStatus(403) : res.json(authData);
@@ -52,11 +53,11 @@ app.post("/verify-token", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  login(req, res, db, process.env.JWT_KEY);
+  login(req, res, db);
 });
 
 app.post("/register", (req, res) => {
-  register(req, res, db, process.env.JWT_KEY);
+  register(req, res, db);
 });
 
 app.post("/image", verifyToken, (req, res) => {
