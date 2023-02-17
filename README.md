@@ -37,11 +37,14 @@
 
 The following packages are required to run this code:
 
+- `bcrypt` for hashing passwords
 - `dotenv` for loading environment variables from a `.env` file
 - `express` for creating the web server
 - `jsonwebtoken` for handling JSON web tokens for authentication
 - `cors` for handling Cross-Origin Resource Sharing (CORS)
 - `pg` for interacting with a PostgreSQL database
+- `uuid` for generating unique identifiers
+
 
 <br></br>
 ## Endpoints 🛠️
