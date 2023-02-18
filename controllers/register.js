@@ -30,9 +30,8 @@ const register = async (req, res, db) => {
   const isPasswordValid = async (password) =>
     /(?=.*\d)(?=.*[a-zA-Z]).{8,}/.test(password);
 
-  const isUsernameValid = async (username) => {
+  const isUsernameValid = (username) =>
     username.length > 3 && username.length < 20;
-  };
 
   if (!(await isUsernameAvailable(username))) {
     console.log("\nUsername not available on registration 🚫");
@@ -54,7 +53,7 @@ const register = async (req, res, db) => {
       .status(401)
       .json("Incorrect format for password on registration 🚫");
   }
-  if (!(await isUsernameValid(username))) {
+  if (!isUsernameValid(username)) {
     console.log("\nIncorrect format for username on registration 🚫");
     return res
       .status(404)
