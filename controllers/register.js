@@ -6,37 +6,46 @@ const register = async (req, res, db) => {
   const { username, email, password } = req.body;
   const id = uuidv4();
 
-  const isEmailValid = async (email) => {
-    const emailRegex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return emailRegex.test(email);
+  const isUsernameAvailable = async (username) => {
+    const users = await db.query("SELECT * FROM users WHERE username = $1", [
+      username,
+    ]);
+    const user = users.rows[0];
+    return user ? false : true;
   };
 
-  const isPasswordValid = async (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return passwordRegex.test(password);
-  };
+  const isEmailValid = async (email) =>
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    );
+
+  const isPasswordValid = async (password) =>
+    /(?=.*\d)(?=.*[a-zA-Z]).{8,}/.test(password);
+
+  if (!(await isUsernameAvailable(username))) {
+    console.log("\nUsername not available on registration 🚫");
+    return res.status(402).json("Username not available on registration 🚫");
+  }
 
   if (!(await isEmailValid(email))) {
     console.log("\nIncorrect format for email on registration 🚫");
     return res
-      .status(401)
+      .status(400)
       .json("Incorrect format for email on registration 🚫");
   }
   if (!(await isPasswordValid(password))) {
     console.log("\nIncorrect format for password on registration 🚫");
     return res
-      .status(402)
+      .status(401)
       .json("Incorrect format for password on registration 🚫");
   }
 
-  const hash = bcrypt.hashSync(password, 10);
   const users = await db.query(
     "INSERT INTO users (id, email, password, username) VALUES($1, $2, $3, $4) RETURNING *",
     [id, email, hash, username]
   );
   const user = users.rows[0];
+  const hash = bcrypt.hashSync(password, 10);
 
   const token = jwt.sign({ id: user.id }, "secretKey", {
     expiresIn: 86400, // expires in 24 hours
