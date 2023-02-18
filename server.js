@@ -30,14 +30,7 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://emijerochim.github.io/smartbrain",
-    ],
-  })
-);
+app.use(cors());
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -49,23 +42,25 @@ app.options("*", (req, res) => {
 });
 
 app.get("/", verifyToken, (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   jwt.verify(req.body.token, "secretKey", (err, authData) => {
     err ? res.sendStatus(403) : res.json(authData);
   });
 });
 app.post("/verify-token", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   jwt.verify(req.body.token, "secretKey", (err, authData) => {
     err ? res.sendStatus(403) : res.json(authData);
   });
 });
 
 app.post("/login", (req, res) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Origin", "*");
   login(req, res, db);
 });
 
 app.post("/register", (req, res) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Origin", "*");
   register(req, res, db);
 });
 
