@@ -4,7 +4,6 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import pkg from "pg";
-
 import box from "./controllers/box.js";
 import login from "./controllers/login.js";
 import register from "./controllers/register.js";
@@ -28,7 +27,6 @@ db.connect((err) => {
 });
 
 const app = express();
-
 app.use(express.json());
 app.use(cors());
 
@@ -47,12 +45,6 @@ app.get("/", verifyToken, (req, res) => {
     err ? res.sendStatus(403) : res.json(authData);
   });
 });
-app.post("/verify-token", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  jwt.verify(req.body.token, "secretKey", (err, authData) => {
-    err ? res.sendStatus(403) : res.json(authData);
-  });
-});
 
 app.post("/login", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -62,6 +54,13 @@ app.post("/login", (req, res) => {
 app.post("/register", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   register(req, res, db);
+});
+
+app.post("/verify-token", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  jwt.verify(req.body.token, "secretKey", (err, authData) => {
+    err ? res.sendStatus(403) : res.json(authData);
+  });
 });
 
 app.post("/image", verifyToken, (req, res) => {
