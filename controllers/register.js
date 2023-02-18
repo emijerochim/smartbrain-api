@@ -19,15 +19,19 @@ const register = async (req, res, db) => {
   };
 
   if (!(await isEmailValid(email))) {
-    console.log("\nIncorrect format for email 🚫");
-    return res.status(401).json("Incorrect format for email");
+    console.log("\nIncorrect format for email on registration 🚫");
+    return res
+      .status(401)
+      .json("Incorrect format for email on registration 🚫");
   }
   if (!(await isPasswordValid(password))) {
-    console.log("\nIncorrect format for password 🚫");
-    return res.status(402).json("Incorrect format for password");
+    console.log("\nIncorrect format for password on registration 🚫");
+    return res
+      .status(402)
+      .json("Incorrect format for password on registration 🚫");
   }
-  const hash = bcrypt.hashSync(password, 10);
 
+  const hash = bcrypt.hashSync(password, 10);
   const users = await db.query(
     "INSERT INTO users (id, email, password, username) VALUES($1, $2, $3, $4) RETURNING *",
     [id, email, hash, username]

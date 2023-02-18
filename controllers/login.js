@@ -8,14 +8,14 @@ const login = async (req, res, db) => {
   const user = users.rows[0];
 
   if (!user) {
-    console.log("\nUser not found 🚫");
-    return res.status(404).json("User not found");
+    console.log("\nEmail not found on login 🚫");
+    return res.status(401).json("\nEmail not found on login 🚫");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    console.log("\nIncorrect password 🚫");
-    return res.status(401).json("Incorrect password");
+    console.log("Password not found on login 🚫");
+    return res.status(402).json("Password not found on login 🚫");
   }
 
   jwt.sign({ user }, "secretKey", { expiresIn: "7d" }, (err, token) => {
