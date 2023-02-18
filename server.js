@@ -30,7 +30,14 @@ db.connect((err) => {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://emijerochim.github.io/smartbrain",
+    ],
+  })
+);
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -53,10 +60,12 @@ app.post("/verify-token", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
   login(req, res, db);
 });
 
 app.post("/register", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
   register(req, res, db);
 });
 
