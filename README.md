@@ -27,13 +27,13 @@
 * HTML5, CSS3, Sass, React.js
 
 ### 🖥️ [Backend](http://github.com/emijerochim/smartbrain-api)
-* Node.js, Express, JWT Authentication, pg 
+* Node.js, Express, pg 
 
 ### 💾 Database 
 * PostgreSQL
 
 ### 📚 Libraries
-* Clarifai API
+* Clarifai API, JWT
 
 ### ☁️ Deploy
 * GitHub Pages
