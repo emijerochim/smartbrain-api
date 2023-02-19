@@ -14,8 +14,8 @@ const login = async (req, res, db) => {
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    console.log("Password not found on login 🚫");
-    return res.status(401).json("Password not found on login 🚫");
+    console.log("Password incorrect 🚫");
+    return res.status(401).json("Password incorrect 🚫");
   }
 
   jwt.sign({ user }, "secretKey", { expiresIn: "7d" }, (err, token) => {

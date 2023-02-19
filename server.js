@@ -52,8 +52,6 @@ const connectToDatabase = () => {
 connectToDatabase()
   .then(() => {
     console.log("Successfully connected to database");
-    // Do something with the database connection
-    // ...
   })
   .catch((err) => {
     console.error("Failed to connect to database", err);
