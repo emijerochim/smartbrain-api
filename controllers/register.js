@@ -31,7 +31,7 @@ const register = async (req, res, db) => {
     /(?=.*\d)(?=.*[a-zA-Z]).{8,}/.test(password);
 
   const isUsernameValid = (username) =>
-    username.length > 3 && username.length < 20;
+    username.length >= 3 && username.length <= 20;
 
   if (!(await isUsernameAvailable(username))) {
     console.log("\nUsername not available on registration 🚫");
