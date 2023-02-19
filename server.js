@@ -8,6 +8,7 @@ import box from "./controllers/box.js";
 import login from "./controllers/login.js";
 import register from "./controllers/register.js";
 import verifyToken from "./controllers/verifyToken.js";
+import retry from "promise-retry";
 
 const { Client } = pkg;
 const db = new Client({
@@ -18,13 +19,45 @@ const db = new Client({
   port: process.env.PGPORT,
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error("🔴 Database connection error\n", err.stack);
-  } else {
-    console.log("📁 Database connected \n", process.env.PGHOST);
-  }
-});
+const connectToDatabase = () => {
+  return retry(
+    async (retry, number) => {
+      console.log(`Connecting to database (attempt ${number})...`);
+      return new Promise((resolve, reject) => {
+        db.connect((err) => {
+          if (err) {
+            console.error(
+              `🔴 Database connection error (attempt ${number})\n`,
+              err.stack
+            );
+            retry(err);
+          } else {
+            console.log(
+              `📁 Database connected (attempt ${number}) \n`,
+              process.env.PGHOST
+            );
+            resolve();
+          }
+        });
+      });
+    },
+    {
+      retries: 3,
+      minTimeout: 1000,
+      maxTimeout: 5000,
+    }
+  );
+};
+
+connectToDatabase()
+  .then(() => {
+    console.log("Successfully connected to database");
+    // Do something with the database connection
+    // ...
+  })
+  .catch((err) => {
+    console.error("Failed to connect to database", err);
+  });
 
 const app = express();
 app.use(express.json());
